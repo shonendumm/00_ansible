@@ -1,0 +1,5 @@
+# Ignore sensitive files
+.env
+*.pem
+*.key
+vault_pass.txt
