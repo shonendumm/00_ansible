@@ -1,0 +1,24 @@
+---
+- name: Get running config from Cisco IOS XR router
+  hosts: iosxr
+  gather_facts: no
+  connection: ansible.netcommon.network_cli
+
+  tasks:
+    - name: Run show running-config for netcommon
+      ansible.netcommon.cli_command:
+        command: show run
+      register: result
+
+    - name: Display running config
+      debug:
+        msg: "{{ result.stdout }}"
+
+    - name: Run show running-config for iosxr
+      cisco.iosxr.iosxr_command:
+        commands: show run
+      register: iosxr_result
+
+    - name: Display running config
+      debug:
+        msg: "{{ iosxr_result.stdout }}"

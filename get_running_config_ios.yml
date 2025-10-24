@@ -1,0 +1,15 @@
+---
+- name: Get running config from Cisco IOS XE router
+  hosts: iosxe
+  gather_facts: no
+  connection: ansible.netcommon.network_cli
+
+  tasks:
+    - name: Run show running-config
+      cisco.ios.ios_command:
+        commands: show run
+      register: result
+
+    - name: Display running config
+      debug:
+        msg: "{{ result.stdout_lines }}"
